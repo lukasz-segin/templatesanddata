@@ -5,11 +5,13 @@
     </h2>
     <table class="table table-sm table-bordered table-striped text-left">
       <tr>
+        <th>Indeks</th>
         <th>Nazwa</th>
         <th>Cena</th>
       </tr>
       <tbody>
-      <tr v-for="p in products" v-bind:key="p.name">
+      <tr v-for="(p, i) in products" v-bind:key="p.name" v-bind:odd="i % 2 === 0">
+        <td>{{ i + 1 }}</td>
         <td>{{ p.name }}</td>
         <td>{{ p.price | currency }}</td>
       </tr>
@@ -31,7 +33,9 @@
         products: [
           {name: "Kajak", price: 275},
           {name: "Kamizelka ratunkowa", price: 48.95},
-          {name: "Piłka nożna", price: 19.50}
+          {name: "Piłka nożna", price: 19.50},
+          {name: "Chorągiewki narożne", price: 39.95},
+          {name: "Stadion", price: 79500}
         ]
       }
     },
@@ -50,7 +54,13 @@
   }
 </script>
 <style>
-  #tagged {
+  [odd] {
+    background-color: lightblue !important;
+  }
+  tbody > tr:nth-child(even) {
     background-color: coral;
+  }
+  tbody > tr:nth-child(odd) {
+    background-color: lightblue;
   }
 </style>
