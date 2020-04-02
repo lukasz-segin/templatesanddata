@@ -10,7 +10,7 @@
         <th>Cena</th>
       </tr>
       <tbody>
-      <tr v-for="(p, i) in products" v-bind:key="p.name" v-bind:odd="i % 2 === 0">
+      <tr v-for="(p, key, i) in products" v-bind:key="p.name">
         <td>{{ i + 1 }}</td>
         <td>{{ p.name }}</td>
         <td>{{ p.price | currency }}</td>
@@ -31,13 +31,13 @@
     name: 'MyComponent',
     data() {
       return {
-        products: [
-          {name: "Kajak", price: 275},
-          {name: "Kamizelka ratunkowa", price: 48.95},
-          {name: "Piłka nożna", price: 19.50},
-          {name: "Chorągiewki narożne", price: 39.95},
-          {name: "Stadion", price: 79500}
-        ]
+        products: {
+          1:{name: "Kajak", price: 275},
+          2:{name: "Kamizelka ratunkowa", price: 48.95},
+          3:{name: "Piłka nożna", price: 19.50},
+          4:{name: "Chorągiewki narożne", price: 39.95},
+          // 5:{name: "Stadion", price: 79500}
+        }
       }
     },
     filters: {
@@ -48,9 +48,7 @@
     },
     methods: {
       handleClick() {
-        Vue.set(this.products, 1, { name: "Buty do biegania", price: 100 });
-        // this.products = this.products.filter(p => p.price > 20);
-        // this.products.push(this.products.shift());
+        Vue.set(this.products, 5, { name: "Buty do biegania", price: 100 });
       }
     }
     // document.querySelector("tbody > tr").id = "tagged"
