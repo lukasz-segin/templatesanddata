@@ -26,6 +26,7 @@
 </template>
 
 <script>
+  import Vue from "vue";
   export default {
     name: 'MyComponent',
     data() {
@@ -47,7 +48,9 @@
     },
     methods: {
       handleClick() {
-        this.products.push(this.products.shift());
+        Vue.set(this.products, 1, { name: "Buty do biegania", price: 100 });
+        // this.products = this.products.filter(p => p.price > 20);
+        // this.products.push(this.products.shift());
       }
     }
     // document.querySelector("tbody > tr").id = "tagged"
