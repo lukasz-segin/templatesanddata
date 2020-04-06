@@ -1,15 +1,19 @@
 <template>
   <div class="container-fluid">
     <div class="bg-info mt-2 p-2 text-white">
-      Wartość: {{ dataValue }}
+      <div>Wartość: {{ dataValue }}</div>
+      <div>Inna wartość: {{ otherValue || "(Pusta)" }}</div>
     </div>
     <div class="bg-primary m-2 p-2 text-white">
       <div class="form-check">
         <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" v-on:change="handleChange" v-bind:checked="dataValue" />
+          <input class="form-check-input" type="checkbox" v-on:change="handleChange" v-bind:checked="dataValue"/>
           Wartość danych
         </label>
       </div>
+    </div>
+    <div class="bg-primary m-2 p-2">
+      <input type="text" class="form-control" v-on:input="handleChange" v-bind:value="otherValue"/>
     </div>
     <div class="text-center m-2">
       <button class="btn btn-secondary" v-on:click="reset">
@@ -24,15 +28,21 @@
     name: 'MyComponent',
     data() {
       return {
-        dataValue: false
+        dataValue: false,
+        otherValue: ""
       }
     },
     methods: {
       reset() {
         this.dataValue = false;
+        this.otherValue = "";
       },
       handleChange($event) {
-        this.dataValue = $event.target.checked;
+        if ($event.target.type === "checkbox") {
+          this.dataValue = $event.target.checked;
+        } else {
+          this.otherValue = $event.target.value;
+        }
       }
     }
   }
